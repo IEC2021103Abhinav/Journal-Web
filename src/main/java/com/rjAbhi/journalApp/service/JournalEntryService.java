@@ -37,7 +37,7 @@ public class JournalEntryService {
 //            At second, we have to saved the journal entries in the user's entries
             user.getJournalEntries().add(saved);
 //            then we update the user
-            userService.saveUser(user);
+            userService.SaveUser(user);
 
         }catch (Exception e){
             log.error("Exception",e);
@@ -67,14 +67,26 @@ public class JournalEntryService {
 //        Optional ek box hai jismein data ho skata hai ya nahi bhi ho skata hai
     }
 
-    public void deleteById(ObjectId id, String username)
+    @Transactional
+    public boolean deleteById(ObjectId id, String username)
     {
-        User user= userService.findByUsername(username);
-        user.getJournalEntries().removeIf(it->it.getId().equals(id));
-        userService.saveUser(user);
-        journalEntryRepository.deleteById(id);
+        boolean removed=false;
+        try {
+            User user= userService.findByUsername(username);
+            removed=user.getJournalEntries().removeIf(it->it.getId().equals(id));
+            if(removed)
+            {
+                userService.SaveUser(user);
+                journalEntryRepository.deleteById(id);
+
+            }
+
+        } catch (RuntimeException e) {
+            System.out.println(e);
+            throw new RuntimeException("An error occurred while deleting journalById");
+        }
+        return removed;
+
     }
-
-
 
 }
