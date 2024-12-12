@@ -12,8 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class MongoConfig {
 
     @Bean
-    public PlatformTransactionManager transactionManager(MongoDatabaseFactory dbFactory)
-    {
+    public PlatformTransactionManager transactionManager(MongoDatabaseFactory dbFactory) {
 //		MongoDatabaseFactory ek interface hai jo ki coonection banaeyaga database se
         return new MongoTransactionManager(dbFactory);
     }

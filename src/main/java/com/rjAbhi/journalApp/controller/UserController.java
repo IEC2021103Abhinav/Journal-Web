@@ -23,14 +23,11 @@ public class UserController {
     private UserRepository userRepository;
 
 
-
-
     @PutMapping
-    public ResponseEntity<?> updateUser(@RequestBody User user)
-    {
-        Authentication authentication= SecurityContextHolder.getContext().getAuthentication();
-        String username= authentication.getName();
-        User userInDb= userService.findByUsername(username);
+    public ResponseEntity<?> updateUser(@RequestBody User user) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User userInDb = userService.findByUsername(username);
         userInDb.setUsername(user.getUsername());
         userInDb.setPassword(user.getPassword());
         userService.SaveNewUser(userInDb);
@@ -39,13 +36,10 @@ public class UserController {
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteUserById(){
-        Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+    public ResponseEntity<?> deleteUserById() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         userRepository.deleteByUsername(authentication.getName());
-        return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
-
 
 }

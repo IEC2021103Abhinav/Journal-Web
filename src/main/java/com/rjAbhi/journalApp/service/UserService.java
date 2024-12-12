@@ -18,36 +18,37 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-    private static  final PasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
+    private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public void SaveNewUser(User user)
-    {
+    public void SaveNewUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Arrays.asList("USER"));
         userRepository.save(user);
     }
 
-    public void SaveUser(User user)
-    {
+    public void SaveUser(User user) {
         userRepository.save(user);
     }
 
-    public List<User> getAll()
-    {
+    public List<User> getAll() {
         return userRepository.findAll();
     }
 
-    public Optional<User> findById(ObjectId id)
-    {
+    public Optional<User> findById(ObjectId id) {
         return userRepository.findById(id);
     }
 
-    public void deleteById(ObjectId id)
-    {
+    public void deleteById(ObjectId id) {
         userRepository.deleteById(id);
     }
 
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public void saveAdmin(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRoles(Arrays.asList("USER","ADMIN"));
+        userRepository.save(user);
     }
 }

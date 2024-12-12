@@ -13,12 +13,12 @@ public class PublicController {
 
 
     @GetMapping("/health-check")
-    public String healthCheck(){
+    public String healthCheck() {
         return "Ok";
     }
 
     @PostMapping("/create-user")
-    public void createUser(@RequestBody User user){
+    public void createUser(@RequestBody User user) {
         userService.SaveNewUser(user);
     }
 
