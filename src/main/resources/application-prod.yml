@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://luciferabhinavdevil666:czq1MY5mcMH01si1@cluster0.aqldi.mongodb.net/journaldb?retryWrites=true&w=majority
+      database: journaldb
+      auto-index-creation: true
+
+
+
