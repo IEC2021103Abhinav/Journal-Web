@@ -2,6 +2,7 @@ package com.rjAbhi.journalApp.service;
 
 import com.rjAbhi.journalApp.entity.User;
 import com.rjAbhi.journalApp.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,18 +16,29 @@ import java.util.Optional;
 
 @Component
 @Service
+@Slf4j
 public class UserService {
     @Autowired
     private UserRepository userRepository;
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    //  we want the logger have only one instance for this journalEntryService class
+//    har ek logger ek specific class ke associated hota hai
+//    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
     public boolean SaveNewUser(User user) {
-        try{
+        try {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.setRoles(Arrays.asList("USER"));
             userRepository.save(user);
-            return  true;
+            return true;
         } catch (Exception e) {
+//            logger.info("Error occurred for {}:",user.getUsername(),e);
+            log.error("Error occurred for {}:", user.getUsername(), e);
+            log.info("Error occurred for {}:", user.getUsername(), e);
+            log.debug("Error occurred for {}:", user.getUsername(), e);
+            log.trace("Error occurred for {}:", user.getUsername(), e);
+            log.warn("Error occurred for {}:", user.getUsername(), e);
             return false;
         }
 
@@ -54,7 +66,7 @@ public class UserService {
 
     public void saveAdmin(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Arrays.asList("USER","ADMIN"));
+        user.setRoles(Arrays.asList("USER", "ADMIN"));
         userRepository.save(user);
     }
 }

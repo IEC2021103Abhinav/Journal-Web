@@ -5,3 +5,8 @@ spring:
 server:
   port: 8080
 
+logging:
+  level:
+    com:
+      rjAbhi:
+        journalApp: TRACE
