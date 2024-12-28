@@ -79,7 +79,7 @@ public class JournalEntryService {
 
             }
         } catch (RuntimeException e) {
-            System.out.println(e);
+            log.error("Error",e);
             throw new RuntimeException("An error occurred while deleting journalById");
         }
         return removed;
