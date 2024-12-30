@@ -14,7 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//we have to use in service file @Service annotation, because it denotes that here we have written the
+//business logic.
+//we can also use @Component but , @Service is good practice for this.
 @Service
 @Slf4j
 public class UserService {
