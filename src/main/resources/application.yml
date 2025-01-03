@@ -10,3 +10,8 @@ logging:
     com:
       rjAbhi:
         journalApp: TRACE
+
+weather:
+  api:
+    key: 5c2b66013088cdf4be36dcf553ca2bae
+    url: https://api.weather.com/v3/weather/forecast?latitude={latitude}&longitude={longitude}&apiKey={apiKey}

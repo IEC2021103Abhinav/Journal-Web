@@ -1,5 +1,6 @@
 package com.rjAbhi.journalApp.controller;
 
+import com.rjAbhi.journalApp.cache.AppCache;
 import com.rjAbhi.journalApp.entity.User;
 import com.rjAbhi.journalApp.service.UserDetailsServiceImpl;
 import com.rjAbhi.journalApp.service.UserService;
@@ -30,8 +31,6 @@ public class PublicController {
     @Autowired
     private JwtUtil jwtUtil;
 
-
-
     @GetMapping("/health-check")
     public String healthCheck() {
         return "Ok";
@@ -58,5 +57,8 @@ public class PublicController {
         }
 
     }
+
+
+
 
 }
